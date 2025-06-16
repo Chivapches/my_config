@@ -70,8 +70,8 @@ TPWS_OPT="
 
 NFQWS_ENABLE=1
 # redirect outgoing traffic with connbytes limiter applied in both directions.
-NFQWS_PORTS_TCP=80,443
-NFQWS_PORTS_UDP=443
+NFQWS_PORTS_TCP=80,443,444-65535
+NFQWS_PORTS_UDP=443,444-65535
 # PKT_OUT means connbytes dir original
 # PKT_IN means connbytes dir reply
 # this is --dpi-desync-cutoff=nX kernel mode implementation for linux. it saves a lot of CPU.
@@ -91,8 +91,8 @@ NFQWS_UDP_PKT_IN=0
 NFQWS_OPT="
 --filter-tcp=443 --hostlist=/opt/zapret/ipset/video.txt --dpi-desync=fake,disorder --dpi-desync-split-pos=50 --dpi-desync-ttl=3 --dpi-desync-fooling=md5sig --dpi-desync-repeats=3 --dpi-desync-fake-tls=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin --dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_iana_org.bin --dpi-desync-split-seqovl=1 --dpi-desync-split-tls=sni --new
 --filter-tcp=443 --hostlist=/opt/zapret/ipset/gv.txt --dpi-desync=split --dpi-desync-fooling=badseq --new
---filter-tcp=443 --hostlist=/opt/zapret/ipset/my.txt --dpi-desync=fake,disorder2 --dpi-desync-fooling=md5sig --new
---filter-udp=443 --hostlist=/opt/zapret/ipset/my.txt --dpi-desync=fake --dpi-desync-repeats=6
+--filter-tcp=443 --hostlist=/opt/zapret/ipset/my.txt --dpi-desync=fake,split2 --dpi-desync-fooling=md5sig --dpi-desync-repeats=6 --dpi-desync-fake-tls=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin --new
+--filter-udp=443 --hostlist=/opt/zapret/ipset/my.txt --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic=/opt/zapret/files/fake/quic_initial_www_google_com.bin
 "
 
 # none,ipset,hostlist,autohostlist
